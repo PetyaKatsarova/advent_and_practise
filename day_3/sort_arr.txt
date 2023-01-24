@@ -1,0 +1,73 @@
+We can easily sort an array of strings in C using the bubble sort algorithm.
+
+We compare the adjacent strings using the strcmp() method inside the nested ‘for’ loops and swap them if they are in 
+the wrong order (i.e. if strcmp() returns a value greater than 0.).
+
+strcmp(string1, string2) method compares the two strings lexicographically and returns the difference between them.
+
+1. Returns 0 if strings are identical
+
+2. Returns +ve difference if string1 > string2
+
+3. Reruns -ve difference if string1 < string2
+
+The algorithm to sort an array of strings in C is as follows:
+
+Create an array of string and initialize it with the values.
+For loop from i=0 to i<size_of_array:
+Nest another for loop from j=0 to j<size_of_array-i-1:
+Check if(strcmp(array[j], array[j+1]) > 0):
+If yes, then swap(array[j], array[j+1])
+End nested loop.
+End outer loop.
+Output the array.
+Here is the implementation of the algorithm in C:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define size_of_array 3  //define size of the array
+ 
+//function to display array
+void display(char array[][30]){
+  for(int i=0; i<size_of_array; i++){
+    printf("%s ", array[i]);
+  }
+  printf("\n");
+}
+ 
+int main()
+{
+  //create an array of strings
+  char array[size_of_array][30];
+
+  //Inputting names
+  printf("Enter %d Strings: \n", size_of_array);
+  for(int i=0; i<size_of_array; i++){
+    scanf("%s", array[i]);
+  }
+
+  //display the original array
+  printf("Original array: ");
+  display(array);
+
+  char temp[30];
+
+  //Sort array using the Buuble Sort algorithm
+  for(int i=0; i<size_of_array; i++){
+    for(int j=0; j<size_of_array-1-i; j++){
+      if(strcmp(array[j], array[j+1]) > 0){
+        //swap array[j] and array[j+1]
+        strcpy(temp, array[j]);
+        strcpy(array[j], array[j+1]);
+        strcpy(array[j+1], temp);
+      }
+    }
+  }
+
+  //display the sorted array
+  printf("Sorted Array: ");
+  display(array);
+
+  return 0;
+}
